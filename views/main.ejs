@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Movie system</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <style>
+    body {
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <a class="navbar-brand" href="/"></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item active">
+                <a class="nav-link" href="/">HOME</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Poster</th>
+              <th scope="col">Title</th>
+              <th scope="col">Genre</th>
+              <th scope="col">Release year</th>
+              <th scope="col">Director</th>
+              <th scope="col">Rank</th>
+              <th scope="col">Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% for(let i=0; i < movies.length; i++) { %>
+            <tr>
+              <td>
+                <img src="<%= movies[i].posterUrl %>" height="200px">
+              </td>
+              <td><%= movies[i].title %></td>
+              <td><%= movies[i].genre %></td>
+              <td><%= movies[i].release_year %></td>
+              <td><%= movies[i].director %></td>
+              <td><%= movies[i].rank %></td>
+              <td>
+                <a class="btn btn-primary btn-sm" href="movie/<%= i %>">Info</a>
+                <a class="btn btn-success btn-sm">Edit</a>
+                <a class="btn btn-danger btn-sm">Delete</a>
+              </td>
+            </tr>
+            <% } %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+
+</body>
+
+</html>
