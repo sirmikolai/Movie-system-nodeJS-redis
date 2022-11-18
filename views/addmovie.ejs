@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Movie system</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+  <style>
+    body {
+      padding-left: 70px;
+      padding-right: 70px;
+    }
+  </style>
+
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+    
+          <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home page</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Top rated movies</a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+      </div>
+    </div>
+  </div>
+
+  <br>
+  <br>
+
+  <div class="container">
+    <form action="/movie/add" method="post" class="needs-validation" novalidate>
+      <div class="form-row">
+        <div class="col-md-12 mb-3">
+          <label>Title</label>
+          <input type="text" class="form-control" placeholder="Title" name="title" required>
+          <div class="invalid-feedback">
+            Please provide the movie title.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Poster URL</label>
+          <input type="text" class="form-control" placeholder="Poster URL" name="posterUrl" required>
+          <div class="invalid-feedback">
+            Please provide the poster URL.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Genre</label>
+          <select class="form-select" name="genre" required>
+            <option value="Historical">Historical</option>
+            <option value="Feature film">Feature film</option>
+            <option value="Tragedy">Tragedy</option>
+            <option value="Documentary">Documentary</option>
+            <option value="Biographical">Biographical</option>
+            <option value="Comedy">Comedy</option>
+            <option value="Horror">Horror</option>
+            <option value="Thriller">Thriller</option>
+          </select>
+          <div class="invalid-feedback">
+            Please select genre.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Release year</label>
+          <input type="number" class="form-control" placeholder="Release year" name="release_year" required>
+          <div class="invalid-feedback">
+            Please provide the release year.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Director</label>
+          <input type="text" class="form-control" placeholder="Director" name="director" required>
+          <div class="invalid-feedback">
+            Please provide the director name.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Rank</label>
+          <input type="number" step="0.1" class="form-control" placeholder="Rank" name="rank" required>
+          <div class="invalid-feedback">
+            Please provide the movie rank.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3">
+          <label>Summary</label>
+          <textarea type="number" class="form-control" placeholder="Summary" name="summary" rows="4" required></textarea>
+          <div class="invalid-feedback">
+            Please provide the movie summary.
+          </div>
+        </div>
+        <div class="col-md-12 mb-3" id="actors">
+          <label>Actors</label>
+          &nbsp;
+          &nbsp;
+          <input class="btn btn-success" type="button" value="+" onClick="addActorInput();">
+          <br>
+          <br>
+          <div class="row">
+            <div class='col-md-10 mb-3'>
+              <input type='text' class='form-control' placeholder='Actor' name='actors' required />
+              <div class='invalid-feedback'>Please provide the actor.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mb-3" id="productionCountries">
+          <label>Production countries</label>
+          &nbsp;
+          &nbsp;
+          <input class="btn btn-success" type="button" value="+" onClick="addProductionCountryInput();">
+          <br>
+          <br>
+          <div class="row">
+            <div class='col-md-10 mb-3'>
+              <input type='text' class='form-control' placeholder='Production country' name='production_countries' required />
+              <div class='invalid-feedback'>Please provide the production country.</div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12 mb-3" id="awards">
+          <label>Awards</label>
+          &nbsp;
+          &nbsp;
+          <input class="btn btn-success" type="button" value="+" onClick="addAwardInput();">
+          <br>
+          <br>
+        </div>
+      </div>
+      <div class="col-md-5 mb-3">
+        <a href="/" class="btn btn-primary" type="button">Back to main page</a>
+        <button class="btn btn-success" type="submit">Add movie</button>
+      </div>
+    </form>
+  </div>
+
+  <br>
+  <br>
+
+  <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+    <div class="container text-center">
+      <small>Copyright &copy; Mikołaj Otręba</small>
+    </div>
+  </footer>
+
+  <script>
+    (function() {
+      window.addEventListener('load', function() {
+        var forms = document.getElementsByClassName('needs-validation');
+        var validation = Array.prototype.filter.call(forms, function(form) {
+          form.addEventListener('submit', function(event) {
+            if (form.checkValidity() === false) {
+              event.preventDefault();
+              event.stopPropagation();
+            }
+            form.classList.add('was-validated');
+          }, false);
+        });
+      }, false);
+    })();
+
+    function addActorInput() {
+      var newdiv = document.createElement('div');
+      newdiv.setAttribute("class", "row")
+      newdiv.innerHTML = "<div class='col-md-10 mb-3'> <input type='text' class='form-control' placeholder='Actor' name='actors' required/> <div class='invalid-feedback'>Please provide the actor.</div> </div> <div class='col-md-2 mb-3'> <input type='button' class='btn btn-danger' value='-' onClick='removeInput(this);'> </div> <br>";
+      document.getElementById("actors").appendChild(newdiv);
+    }
+
+    function addProductionCountryInput() {
+      var newdiv = document.createElement('div');
+      newdiv.setAttribute("class", "row")
+      newdiv.innerHTML = "<div class='col-md-10 mb-3'> <input type='text' class='form-control' placeholder='Production country' name='production_countries' required/> <div class='invalid-feedback'>Please provide the production country.</div> </div> <div class='col-md-2 mb-3'> <input type='button' class='btn btn-danger' value='-' onClick='removeInput(this);'> </div> <br>";
+      document.getElementById("productionCountries").appendChild(newdiv);
+    }
+
+    function addAwardInput() {
+      var newdiv = document.createElement('div');
+      newdiv.setAttribute("class", "row")
+      newdiv.innerHTML = "<div class='col-md-5 mb-3'> <input type='number' class='form-control' placeholder='Year' name='awards[year]' required/> </div><div class='col-md-5 mb-3'> <input type='text' class='form-control' placeholder='Award name' name='awards[name]' required/> </div><div class='col-md-2 mb-3'> <input type='button' class='btn btn-danger' value='-' onClick='removeInput(this);'> </div> <br>";
+      document.getElementById("awards").appendChild(newdiv);
+    }
+
+    function removeInput(btn) {
+      btn.parentNode.parentNode.remove();
+    }
+  </script>
+  </div>
+</body>
+
+</html>

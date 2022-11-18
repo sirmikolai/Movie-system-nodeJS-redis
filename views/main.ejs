@@ -27,14 +27,17 @@
     <div class="row">
       <div class="col-12">
         <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-          <a class="navbar-brand" href="/"></a>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample08" aria-controls="navbarsExample08" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarNav">
+    
+          <div class="collapse navbar-collapse justify-content-md-center" id="navbarsExample08">
             <ul class="navbar-nav">
-              <li class="nav-item active">
-                <a class="nav-link" href="/">HOME</a>
+              <li class="nav-item">
+                <a class="nav-link" href="/">Home page</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Top rated movies</a>
               </li>
             </ul>
           </div>
@@ -47,6 +50,13 @@
   <br>
 
   <div class="container">
+    <div class="row">
+      <div class="col-12 content text-center">
+        <a href="/movie/add-form" class="btn btn-success">Add movie</a>
+      </div>
+    </div>
+    <hr>
+    <br>
     <div class="row">
       <div class="col-12">
         <table class="table">
@@ -73,9 +83,9 @@
               <td><%= movies[i].director %></td>
               <td><%= movies[i].rank %></td>
               <td>
-                <a class="btn btn-primary btn-sm" href="movie/<%= i %>">Info</a>
-                <a class="btn btn-success btn-sm">Edit</a>
-                <a class="btn btn-danger btn-sm">Delete</a>
+                <a class="btn btn-primary btn-sm" href="movie/info/<%= i %>">Info</a>
+                <a class="btn btn-success btn-sm" href="/movie/edit-form/<%= i %>">Edit</a>
+                <a class="btn btn-danger btn-sm" href="movie/delete/<%= i %>" onclick="return confirm('Do you want delete this movie?');">Delete</a>
               </td>
             </tr>
             <% } %>
@@ -83,9 +93,16 @@
         </table>
       </div>
     </div>
+
+    <br>
+    <br>
+
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50">
+      <div class="container text-center">
+        <small>Copyright &copy; Mikołaj Otręba</small>
+      </div>
+    </footer>
   </div>
-
-
 </body>
 
 </html>
