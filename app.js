@@ -95,14 +95,12 @@ async function editMovie(id, title, posterUrl, genre, release_year, director, ra
     transaction.del("production_country:movie:" + id);
     transaction.del("summary:movie:" + id);
     transaction.del("awards:movie:" + id);
-
     transaction.hSet("movie:" + id, "title", title)
     transaction.hSet("movie:" + id, "posterUrl", posterUrl)
     transaction.hSet("movie:" + id, "genre", genre)
     transaction.hSet("movie:" + id, "release_year", release_year)
     transaction.hSet("movie:" + id, "director", director)
     transaction.hSet("movie:" + id, "rank", rank)
-
     if (Array.isArray(actors)) {
         for (let i = 0; i < actors.length; i++) {
             transaction.rPush("actors:movie:" + id, actors[i]);
@@ -110,7 +108,6 @@ async function editMovie(id, title, posterUrl, genre, release_year, director, ra
     } else {
         transaction.rPush("actors:movie:" + id, actors);
     }
-
     if (Array.isArray(production_countries)) {
         for (let i = production_countries.length - 1; i >= 0; i--) {
             transaction.sAdd("production_country:movie:" + id, production_countries[i]);
@@ -118,7 +115,6 @@ async function editMovie(id, title, posterUrl, genre, release_year, director, ra
     } else {
         transaction.sAdd("production_country:movie:" + id, production_countries);
     }
-
     transaction.set("summary:movie:" + id, summary);
     if (awards != null) {
         if (Array.isArray(awards['year']) && Array.isArray(awards['name'])) {
